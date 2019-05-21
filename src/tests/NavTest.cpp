@@ -4,7 +4,6 @@
 
 #include <gtest/gtest.h>
 #include "esp/agent/Agent.h"
-#include "esp/assets/SceneLoader.h"
 #include "esp/core/esp.h"
 #include "esp/core/random.h"
 #include "esp/nav/ActionSpacePath.h"
@@ -100,18 +99,6 @@ TEST(NavTest, PathFinderTestCases) {
   CHECK_LE(std::abs(testPath.geodesicDistance -
                     (testPath.requestedStart - testPath.requestedEnd).norm()),
            0.001);
-}
-
-TEST(NavTest, BuildNavMeshFromMeshTest) {
-  using namespace esp::assets;
-  SceneLoader loader;
-  const AssetInfo info = AssetInfo::fromPath("test.glb");
-  const MeshData mesh = loader.load(info);
-  NavMeshSettings bs;
-  bs.setDefaults();
-  PathFinder pf;
-  pf.build(bs, mesh);
-  testPathFinder(pf);
 }
 
 TEST(NavTest, ActionSpacePath) {
