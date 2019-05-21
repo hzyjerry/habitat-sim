@@ -17,5 +17,6 @@ endif()
 target_link_libraries(datatool
   PRIVATE
     assets
+    assimp
     nav
 )
