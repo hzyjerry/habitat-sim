@@ -33,8 +33,8 @@ Viewer::Viewer(const Arguments& arguments)
       controls_(),
       previousPosition_() {
   Utility::Arguments args;
-  args.addArgument("file")
-      .setHelp("file", "file to load")
+  args.addNamedArgument("scene")
+      .setHelp("scene", "scene file to load")
       .addBooleanOption("action-path")
       .setHelp("action-path",
                "Provides actions along the action space shortest path to a "
@@ -55,7 +55,7 @@ Viewer::Viewer(const Arguments& arguments)
   auto& sceneGraph = sceneManager_.getSceneGraph(sceneID);
   auto& rootNode = sceneGraph.getRootNode();
   auto& drawables = sceneGraph.getDrawables();
-  const std::string& file = args.value("file");
+  const std::string& file = args.value("scene");
   const assets::AssetInfo info = assets::AssetInfo::fromPath(file);
   if (!resourceManager_.loadScene(info, &rootNode, &drawables)) {
     LOG(ERROR) << "cannot load " << file;
